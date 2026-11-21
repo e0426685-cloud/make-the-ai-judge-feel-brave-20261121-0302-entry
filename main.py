@@ -26,6 +26,10 @@ def main() -> None:
     path = os.path.join(output_dir, "entry.txt")
     with open(path, "w", encoding="utf-8") as f:
         f.write(TEXT)
+    # Read back and verify the file holds exactly the text we wrote.
+    with open(path, encoding="utf-8") as f:
+        written = f.read()
+    assert written == TEXT, "entry.txt does not match the text"
     # Self-check against the gate: 1 to 280 Unicode code points, not blank.
     assert 1 <= len(TEXT) <= 280, "text length outside 1-280 characters"
     assert TEXT.strip(), "text must not be only white space"
